@@ -12,44 +12,6 @@ import streamlit as st
 import spacy_streamlit
 import io
 
-from spacy_streamlit import load_model
-spacy_model = st.sidebar.selectbox("Model name", ["en_core_web_sm"])
-nlp = load_model(spacy_model)
-
-# import pre-trained model.
-nlp = spacy.load("en_core_web_sm")
-# models = ["en_core_web_sm"]
-
-print(nlp._path)
-
-# sample text1
-text1 = "Apple is looking at buying U.K. startup for $1 billion"
-
-# sample text2
-text2 = "SpaceX launches Falcon 9 rocket carrying Startlink satellites"
-
-# sample text3
-text3 = "Introducing the new iPhone 13 with advanced camera technology"
-
-# sample text4
-text4 = "Just booked tickets for a vacation in Paris with my friends!"
-
-# sample text5
-text5 = "This agreement is made between Company X and Company Y for the sale of goods."
-
-
-# Process the text with the loaded model. 
-def get_named_entities(text):
-    
-    # load the text in doc variable. 
-    doc = nlp(text)
-    # Print the named entities
-    for ent in doc.ents:
-        print (ent.text, ent.label_)
-    
-    
-# output the named entities
-# get_named_entities(text2)
 
 #%%
 st.title("SpaCy NER Explorer")
@@ -80,10 +42,3 @@ st.write(cnn_articles_df.describe())
 st.markdown(f" ## let's take a look of first few rows how the data is looking like.")
 pd.set_option("display.max_columns",200)
 st.dataframe(cnn_articles_df.head())
-
-
-
-
-
-
-
