@@ -17,12 +17,11 @@ import io
 #%%
 st.title("SpaCy NER Explorer")
 
-st.markdown(
-    '''
-Named Entity Recognition (NER) project using SpaCy. NER is a task in NLP where we identify and classify entities in text, 
-like names of people, organizations, locations, dates, and other important information. 
-This project will help you get familiar with SpaCy and its capabilities in handling text data.    '''
-    )
+st.markdown('''
+        Named Entity Recognition (NER) project using SpaCy. NER is a task in NLP where we identify and classify entities in text, 
+        like names of people, organizations, locations, dates, and other important information. 
+        This project will help you get familiar with SpaCy and its capabilities in handling text data.    
+        ''')
 
 st.markdown('''
             ## **`This dataset contains around 38000 lines of articles from CNN news from the year 2011 to 2022.`**
@@ -36,7 +35,7 @@ st.markdown('''
 cnn_articles_df = pd.read_csv('./data/CNN_Articels_clean.csv')
 
 #%%
-st.markdown(f" ## Get summary of the dataset's structure")
+st.markdown(" ## Get summary of the dataset's structure")
 buffer = io.StringIO()
 cnn_articles_df.info(buf=buffer)
 df_cnn_articles_info = buffer.getvalue()
@@ -59,30 +58,46 @@ st.markdown('''
             'Article text' : 'ArticleText'`
             ''')
             
-st.markdown(f" ## Get statistics of the dataset")
+st.markdown(" ## Get statistics of the dataset")
 st.write(cnn_articles_df.describe())
 
 #%%
-st.markdown(f" ## let's take a look in first few rows how the data is looking like.")
+st.markdown(" ## let's take a look in first few rows how the data is looking like.")
 pd.set_option("display.max_columns",200)
 st.dataframe(cnn_articles_df.head())
 
 st.markdown('''
-            Looks neat so far. now we can start choosing some interesting features to explore and analyse the articles in the dataset.
+            Looks neat so far. 
+            now we can start choosing some interesting features to explore and analyse the articles in the dataset.
             ''')
+            
+#%%
+# Check for the null values in the dataset.
+st.markdown("## Check for Null values")
+null_values = cnn_articles_df.isna().sum()
+if null_values.any():
+    st.write(" Null values found in the dataset")
+    st.write(null_values[null_values > 0])
+else:
+    st.write(" No null values are found in the dataset")
+    
 #%%
 # Choosing the intresting features to analyse in the dataset.
-st.markdown(f" ## Types of articles covered in sections under each category")
+st.markdown(" ## Types of articles covered in sections under each category")
 group_cat_sections = cnn_articles_df.groupby(['Category']).agg({
     'Section' : lambda x : list(x.unique())
     }).reset_index()
 
-st.markdown(f" (Double click on the cell to see the full list) ")
+st.markdown(" (Double click on the cell to see the full list) ")
 st.dataframe(group_cat_sections, use_container_width=True)
 
 #%%
 st.markdown('''
-            Pretty standard list of article sections under each category and pretty straight forward that `health` and `politics` are just as their name suggests.
+            Pretty standard list of article sections under each category and pretty straight forward 
+            that `health` and `politics` are just as their name suggests.
             \n 
-            Although there are many intresting sections to dive into I'm curious to dig deeper into `tech` under `business` category. Wonder how tech is evolved since 2011 to 2022. 
+            Although there are many intresting sections to dive into I'm curious to dig deeper 
+            into `tech` under `business` category. Wonder how tech is evolved since 2011 to 2022. 
             ''')
+
+
