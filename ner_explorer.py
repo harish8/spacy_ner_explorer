@@ -32,7 +32,7 @@ st.markdown('''
             
 #%%
 # load the articles dataset in a var `cnn_articles_df`
-cnn_articles_df = pd.read_csv('./data/CNN_Articels_clean.csv')
+cnn_articles_df = pd.read_csv('./data/CNN_Articels_clean.csv').set_index('Index').reset_index(drop=True)
 
 #%%
 st.markdown(" ## Get summary of the dataset's structure")
@@ -101,3 +101,12 @@ st.markdown('''
             ''')
 
 
+#%%
+st.write('## Fetch all the articles of `tech` in `business` category')
+cnn_articles_in_tech = cnn_articles_df[
+    (cnn_articles_df['Category'] == 'business') &
+    (cnn_articles_df['Section'] == 'tech')
+    ]
+
+st.write(f" Total number of articles in tech = {len(cnn_articles_in_tech)} ")
+st.dataframe(cnn_articles_in_tech)
