@@ -7,7 +7,6 @@ Created on Mon May 27 15:35:43 2024
 """
 
 import pandas as pd
-import numpy as np
 import spacy
 import streamlit as st
 import spacy_streamlit
@@ -110,3 +109,5 @@ cnn_articles_in_tech = cnn_articles_df[
 
 st.write(f" Total number of articles in tech = {len(cnn_articles_in_tech)} ")
 st.dataframe(cnn_articles_in_tech)
+
+#%%
