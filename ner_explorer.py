@@ -15,6 +15,14 @@ import io
 from spacy_streamlit import load_model
 from spacy import displacy
 
+import subprocess
+
+#Fix to install the spacy models on fly https://discuss.streamlit.io/t/how-to-include-en-core-web-sm-2-2-0-in-deployment/37673/2
+@st.cache_resource
+def download_en_core_web_sm_md():
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_md"])
+
 
 #%%
 st.title("SpaCy NER Explorer")
